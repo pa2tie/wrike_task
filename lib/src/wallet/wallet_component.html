@@ -1,0 +1,19 @@
+<h3>Wallet</h3>
+<div>
+    <label>Введите сумму для вывода наличных:</label>
+    <input #sum />
+    <button (click)="cashout(bills, capacity)">Вывод</button>
+</div>
+<div class="wrapper" *ngIf="cashoutBills != null">
+    <h4>Заберите наличные</h4>
+    <div class="cashout-header">
+        <span>Номинал</span>
+        <span>Количество купюр</span>
+    </div>
+    <ul class="cashout-bills">
+        <li *ngFor="let bill of cashoutBills.keys">
+            <span class="bill-nominal">{{bill}}</span>
+            <span class="bill-count">{{cashoutBills[bill]}}</span>
+        </li>
+    </ul>
+</div>
