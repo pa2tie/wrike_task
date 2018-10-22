@@ -75,31 +75,40 @@ class WalletComponent implements OnInit {
       var newAmount = lastSubAmount + lastItem['n'];
       var newCurrentRowAmount = lastCurrentRowAmount + lastItem['n'];
 
-      print('-');
-      print(lastItem);
-      print(newCurrentRowCount);
+      List<dynamic> lastSolutions = [lastSubSolution, lastSolutionCurrentRow];
+      lastSolutions.sort((a, b) {
+        if (a['subset'].length == b['subset'].length) {
+          return (a['count'] < b['count']) ? -1 : 1;
+        } else {
+          return (a['subset'].length > b['subset'].length) ? -1 : 1;
+        }
+      });
+
+      lastSolutions = lastSolutions.where((a) => a['n'] == cap).toList();
+
+      
       if (newAmount == cap) {
-        var lastSubSet = new List.from(lastSubSolution['subset']);
-        var subset = lastSubSet.length > 0 ? lastSubSet.firstWhere((el) => el['n'] == lastItem['n'], orElse: () => []) : lastSubSet;
+        var _lastSubSet = List.of(lastSubSolution['subset'].map((el) => new Map.from(el)));
+        var subset = _lastSubSet.length > 0 ? _lastSubSet.firstWhere((el) => el['n'] == lastItem['n'], orElse: () => []) : _lastSubSet;
 
         if (subset.length > 0) {
-          lastSubSet.forEach((el) => el['n'] == subset['n'] ? el['c']++ : el);
-          return { 'amount': newAmount, 'count': newCount, 'subset': lastSubSet};
+          subset['c']++;
+          return { 'amount': newAmount, 'count': newCount, 'subset': _lastSubSet};
         } else {
-          lastSubSet.add(new Map.from(lastItem));
-          return { 'amount': newAmount, 'count': newCount, 'subset': lastSubSet};
+          _lastSubSet.add(new Map.from(lastItem));
+          return { 'amount': newAmount, 'count': newCount, 'subset': _lastSubSet};
         }
 
       } else if (newCurrentRowAmount == cap) {
-        var lastCurRowSet = new List.from(lastSolutionCurrentRow['subset']);
-        var subset = lastCurRowSet.length > 0 ? lastCurRowSet.firstWhere((el) => el['n'] == lastItem['n'], orElse: () => []) : lastCurRowSet;
+        var _lastCurRowSet = List.of(lastSolutionCurrentRow['subset'].map((el) => new Map.from(el)));
+        var subset = _lastCurRowSet.length > 0 ? _lastCurRowSet.firstWhere((el) => el['n'] == lastItem['n'], orElse: () => {}) : _lastCurRowSet;
 
         if (subset.length > 0) {
-          lastCurRowSet.forEach((el) => el['n'] == subset['n'] ? el['c']++ : el);
-          return { 'amount': newCurrentRowAmount, 'count': newCurrentRowCount, 'subset': lastCurRowSet};
+          subset['c']++;
+          return { 'amount': newCurrentRowAmount, 'count': newCurrentRowCount, 'subset': _lastCurRowSet};
         } else {
-          lastCurRowSet.add(new Map.from(lastItem));
-          return { 'amount': newCurrentRowAmount, 'count': newCurrentRowCount, 'subset': lastCurRowSet};
+          _lastCurRowSet.add(new Map.from(lastItem));
+          return { 'amount': newCurrentRowAmount, 'count': newCurrentRowCount, 'subset': _lastCurRowSet};
         }
 
       } else {
