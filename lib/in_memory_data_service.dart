@@ -9,9 +9,9 @@ import 'src/bill/bill.dart';
 
 class InMemoryDataService extends MockClient {
   static final _initialBills = [
-    {'nominal': 1},
-    {'nominal': 5},
-    {'nominal': 10}
+    {'nominal': 1, 'count': 1},
+    {'nominal': 5, 'count': 1},
+    {'nominal': 10, 'count': 1}
   ];
   static List<Bill> _billsDb;
 
@@ -31,7 +31,7 @@ class InMemoryDataService extends MockClient {
         break;
       case 'POST':
         var nominal = json.decode(request.body)['nominal'];
-        if (_billsDb.firstWhere((bill) => bill.nominal == nominal) == null) {
+        if (_billsDb.firstWhere((bill) => bill.nominal == nominal, orElse: () => null) == null) {
           var newBill = Bill(nominal);
           _billsDb.add(newBill);
           data = newBill;

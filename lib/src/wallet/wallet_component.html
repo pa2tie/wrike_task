@@ -2,7 +2,7 @@
 <div>
     <label>Введите сумму для вывода наличных:</label>
     <input #sum />
-    <button (click)="cashout(bills, capacity)">Вывод</button>
+    <button (click)="cashoutBills = cashout(storageBills, sum.value)['subset']; sum.value = ''">Вывод</button>
 </div>
 <div class="wrapper" *ngIf="cashoutBills != null">
     <h4>Заберите наличные</h4>
@@ -11,9 +11,9 @@
         <span>Количество купюр</span>
     </div>
     <ul class="cashout-bills">
-        <li *ngFor="let bill of cashoutBills.keys">
-            <span class="bill-nominal">{{bill}}</span>
-            <span class="bill-count">{{cashoutBills[bill]}}</span>
+        <li *ngFor="let bill of cashoutBills">
+            <span class="bill-nominal">{{bill['n']}}</span>
+            <span class="bill-count">{{bill['c']}}</span>
         </li>
     </ul>
 </div>

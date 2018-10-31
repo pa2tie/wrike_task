@@ -12,8 +12,8 @@ import '../routes/route_paths.dart';
   directives: [coreDirectives, routerDirectives],
 )
 class WalletComponent implements OnInit {
-  Map<int, int> cashoutBills;
-  List<Bill> storageBills;
+  var cashoutBills;
+  List<dynamic> storageBills;
   int sum;
   final BillService _billService;
 
@@ -28,7 +28,7 @@ class WalletComponent implements OnInit {
   var capacity = 45;
 
   dynamic cashout(bills, capacity) {
-
+    capacity = int.parse(capacity);
     List<dynamic> memo = [];
 
     getLast() {
@@ -96,18 +96,17 @@ class WalletComponent implements OnInit {
       memo.add(row);
       for(var cap = 1; cap <= capacity; cap++) {
         memo[i].add(getSolution(i, cap));
-        // print(memo[i][cap - 1]);
       }
     }
 
-    print(getLast());
     return getLast();
     
   }
 
   @override
   void ngOnInit() async {
-    storageBills = (await _billService.getAll()).toList();
+    storageBills = (await _billService.getAll()).toList().map((el) => new Map.from({"n": el.nominal, "c": el.count})).toList();
+    print(storageBills[0]);
   }
 
 

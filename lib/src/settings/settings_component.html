@@ -1,10 +1,18 @@
-<!-- <h2>Settings</h2>
+<h2>Settings</h2>
 <div>
     <label>Введите номинал:</label><input #nominal />
     <button (click)="add(nominal.value); nominal.value =''">
         Добавить
     </button>
 </div>
-<ul>
-    
-</ul> -->
+
+<ul class="heroes">
+  <label class="heroes__title">Список номиналов</label>
+  <li *ngFor="let bill of billsStorage"
+      [class.selected]="bill === selected"
+      (click)="onSelect(bill)">
+    <span class="badge">{{bill.nominal}}</span>
+    <button class="delete"
+      (click)="delete(bill); $event.stopPropagation()">x</button>
+  </li>
+</ul>

@@ -17,6 +17,7 @@ class BillService {
     
     try {
       final response = await _http.get(_billsStorageUrl);
+      print(_extractData(response));
       final billsStorage = (_extractData(response) as List)
           .map((json) => Bill.fromJson(json))
           .toList();
@@ -42,10 +43,11 @@ class BillService {
     }
   }
 
-  Future<Bill> add(int nominal) async {
+  Future<Bill> create(int nominal) async {
     try {
       final response = await _http.post(_billsStorageUrl,
           headers: _headers, body: json.encode({'nominal': nominal}));
+          print(response);
       return Bill.fromJson(_extractData(response));
     } catch (e) {
       throw _handleError(e);

@@ -1,0 +1,9 @@
+<div *ngIf="bill != null">
+    <h2>{{bill.nominal}}</h2>
+    <div>
+      <label>nominal: </label>
+      <input [(ngModel)]="bill.nominal" placeholder="name" />
+    </div>
+    <button (click)="goBack()">Back</button>
+    <button (click)="save()">Save</button>
+  </div>
