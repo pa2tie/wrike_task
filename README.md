@@ -9,7 +9,7 @@
 <br>
 <b>Для запуска:</b><br>
 1. Create a local copy of this repo (use the "Clone or download" button above).<br>
-2. Get the dependencies: <b>pub get</b>.<br>
-3. Get the webdev tool: <b>pub global activate webdev</b>.<br>
-4. Launch a development server: <b>webdev serve</b>.<br>
+2. Get the dependencies: <b>pub get</b><br>
+3. Get the webdev tool: <b>pub global activate webdev</b><br>
+4. Launch a development server: <b>webdev serve</b><br>
 5. In a browser, open <a href="http://localhost:8080">http://localhost:8080</a><br>
