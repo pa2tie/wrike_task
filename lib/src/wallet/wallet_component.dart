@@ -13,22 +13,15 @@ import '../routes/route_paths.dart';
 )
 class WalletComponent implements OnInit {
   var cashoutBills;
-  List<dynamic> storageBills;
+  List<Bill> storageBills;
   int sum;
   final BillService _billService;
 
   WalletComponent(this._billService);
 
-  var bills = [
-    {'n': 5, 'c': 1},
-    {'n': 10, 'c': 1},
-    {'n': 15, 'c': 1}
-  ];
-
-  var capacity = 45;
-
-  dynamic cashout(bills, capacity) {
+  dynamic cashout(List<Bill> storageBills, capacity) {
     capacity = int.parse(capacity);
+    var bills = storageBills.map((el) => new Map.from({"n": el.nominal, "c": el.count})).toList();
     List<dynamic> memo = [];
 
     getLast() {
@@ -60,8 +53,6 @@ class WalletComponent implements OnInit {
 
       List<dynamic> lastSolutions = [lastSubSolution, lastSolutionCurrentRow];
       lastSolutions = lastSolutions.where((a) => (a['amount'] + lastItem['n']) == cap).toList();
-
-      List<dynamic> newLastSolutions = [];
 
       lastSolutions = lastSolutions.map((a) {
           var _lastSubSet = List.of(a['subset'].map((el) => new Map.from(el)));
@@ -105,8 +96,7 @@ class WalletComponent implements OnInit {
 
   @override
   void ngOnInit() async {
-    storageBills = (await _billService.getAll()).toList().map((el) => new Map.from({"n": el.nominal, "c": el.count})).toList();
-    print(storageBills[0]);
+    storageBills = (await _billService.getAll()).toList();
   }
 
 

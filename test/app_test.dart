@@ -5,28 +5,18 @@ import 'package:angular_app/app_component.template.dart' as ng;
 import 'package:angular_test/angular_test.dart';
 import 'package:test/test.dart';
 
+import '../lib/src/bill/bill.dart';
+import '../lib/src/wallet/wallet_component.dart';
+
 void main() {
-  final testBed =
-      NgTestBed.forComponent<AppComponent>(ng.AppComponentNgFactory);
-  NgTestFixture<AppComponent> fixture;
+  test('Cashout 20 amount, for nominals 1, 5, 10', () {
 
-  setUp(() async {
-    fixture = await testBed.create();
-  });
-
-  tearDown(disposeAnyRunningTest);
-
-  test('Default greeting', () {
-    expect(fixture.text, 'Hello Angular');
-  });
-
-  test('Greet world', () async {
-    await fixture.update((c) => c.name = 'World');
-    expect(fixture.text, 'Hello World');
-  });
-
-  test('Greet world HTML', () {
-    final html = fixture.rootElement.innerHtml;
-    expect(html, '<h1>Hello Angular</h1>');
+    final _initialBills = [
+      {'nominal': 1, 'count': 1},
+      {'nominal': 5, 'count': 1},
+      {'nominal': 10, 'count': 1}
+    ];
+    List<Bill> _billsDb = _initialBills.map((json) => Bill.fromJson(json)).toList();
+    expect(_billsDb != [], true);
   });
 }

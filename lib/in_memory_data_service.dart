@@ -27,7 +27,6 @@ class InMemoryDataService extends MockClient {
         } else {
           data = _billsDb.toList();
         }
-        print(data);
         break;
       case 'POST':
         var nominal = json.decode(request.body)['nominal'];

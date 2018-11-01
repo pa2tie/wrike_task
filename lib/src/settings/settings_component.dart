@@ -29,7 +29,6 @@ class SettingsComponent implements OnInit {
     nominal = int.parse(nominal);
     billsStorage.add(await _billService.create(nominal));
     selected = null;
-    print(billsStorage.length);
   }
 
   Future<void> delete(Bill bill) async {
