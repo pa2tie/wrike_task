@@ -12,4 +12,4 @@
 2. Get the dependencies: pub get.<br>
 3. Get the webdev tool: pub global activate webdev.<br>
 4. Launch a development server: webdev serve.<br>
-5. In a browser, open http://localhost:8080.<br>
+5. In a browser, open http://localhost:8080<br>
