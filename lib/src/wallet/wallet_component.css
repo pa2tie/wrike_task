@@ -1,0 +1,50 @@
+.wrapper {
+    margin-top: 5em;
+    width: 15em;
+}
+.cashout-header {
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cashout-bills {
+    margin: 0 0 2em 0;
+    list-style-type: none;
+    padding: 0;
+    width: 15em;
+}
+
+.cashout-bills li {
+    position: relative;
+    left: 0;
+    background-color: #EEE;
+    margin: .5em;
+    padding: .3em 0;
+    height: 1.8em;
+    border-radius: 4px;
+    line-height: 1em;
+    vertical-align: middle;
+}
+
+.cashout-bills .bill-nominal {
+    display: inline-block;
+    font-style: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    background-color: #607D8B;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    top: -5px;
+    height: 1.6em;
+    margin-right: .8em;
+    border-radius: 4px 0 0 4px;
+}
+
+.cashout-bills .bill-count {
+    line-height: 1em;
+    position: relative;
+    top: -5px;
+    right: 0;
+}
